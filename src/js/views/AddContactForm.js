@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -11,6 +11,16 @@ const AddContactForm = () => {
   const[email, setEmail] = useState("");
   const[phone, setPhone] = useState("");
   const[address, setAddress] = useState("");
+
+  useEffect(() => {
+  const contacto=  store.listaDeContactos.find (contact=>contact.id==id)
+  if (contacto){
+    setName(contacto.name)
+    setEmail(contacto.email)
+    setPhone(contacto.phone)
+    setAddress(contacto.address)
+  }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
